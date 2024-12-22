@@ -1,36 +1,78 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+# Project Overview
 
-First, run the development server:
+This project is built using **Next.js** and **React** with **TypeScript** for type safety. The application leverages 
+**Custom CSS** and **Tailwind CSS** for styling and **Vitest** for unit testing. Below is a detailed guide to understanding the folder 
+structure and running the project.
 
+## Build and Run Instructions
+
+### Build the Project:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Start the Production Server:
+```bash
+npm start
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Folder Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```plaintext
+__tests__/           // Contains test files organized by components.
+  components/
+    atoms/
+    molecules/
+    organisms/
+    templates/
 
-## Learn More
+.next/               // Next.js build output.
 
-To learn more about Next.js, take a look at the following resources:
+public/              // Static assets like images.
+  images/
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+src/                 // Main source code directory.
+  app/               // Application-specific components and pages.
+  constants/         // Constant values used across the project.
+  dto/               // Data Transfer Objects.
+  hooks/             // Custom React hooks.
+  styles/            // Styling files.
+  types/             // TypeScript type definitions.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+tailwind.config.ts   // Tailwind CSS configuration.
+tsconfig.json        // TypeScript configuration.
+vitest.config.mts    // Vitest configuration.
+vitest.setup.ts      // Vitest setup file.
+```
 
-## Deploy on Vercel
+## Assumptions and Trade-offs
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Assumptions:
+- The project uses **Next.js** for server-side rendering and React for building UI components.
+- **Custom CSS** and **Tailwind CSS** is used for styling.
+- **Vitest** is used for testing.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Trade-offs:
+- **Next.js** is chosen for its built-in server-side rendering capabilities, which may add complexity but 
+  provides better performance for dynamic content.
+- Using **Tailwind CSS** for utility-first styling, which can lead to more verbose HTML but offers greater 
+  flexibility and faster styling.
+- Opted for **Vitest** for its speed and modern features, even though it might have less community support compared to Jest.
+
+## Screenshots
+
+Below are screenshots of the project:
+
+<div style="display: flex; align-items: center; justify-content: flex-start">
+  <image style="width: 50%; height: auto" src="./screenshots/localhost_3000_(iPhone 12 Pro)_1.png" />
+  <image style="width: 50%; height: auto" src="./screenshots/localhost_3000_(iPhone 12 Pro)_2.png" />
+</div>
+
+## Recording
+
+### Short Demo of the Application
+<video width="320" height="240" controls>
+  <source src="./screenshots/demo.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
