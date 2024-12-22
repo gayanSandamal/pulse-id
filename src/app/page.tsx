@@ -1,6 +1,6 @@
 'use client';
 
-import Section from './components/templates/section';
+import Section from './components/templates/Section';
 import { Cities } from './components/organisms/CitiesList';
 import ImageSlider from './components/molecules/ImageSlider';
 import { useOffers } from '@/hooks/useOffers';

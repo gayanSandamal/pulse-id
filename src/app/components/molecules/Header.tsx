@@ -32,7 +32,7 @@ export const Header = () => {
                             className="object-cover"
                         />
                     </Link>
-                    <User title="John Doe" subtitle="Welcome" src="/images/avatar-placeholder.jpg" />
+                    <User title="John Doe" subtitle="Welcome" src="/images/user.jpg" />
                 </div>
             </div>
         </header>

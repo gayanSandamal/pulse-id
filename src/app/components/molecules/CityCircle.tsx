@@ -15,6 +15,7 @@ const CityCircle = (props: CityCircleProps) => {
                 className
             )}
             href={href}
+            data-testid="city-circle"
         >
             <div style={{ marginBottom: SpacerSizeMap.S8 }}>
                 <Avatar src={src} alt={label} />
