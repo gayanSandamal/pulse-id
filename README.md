@@ -71,8 +71,5 @@ Below are screenshots of the project:
 
 ## Recording
 
-### Short Demo of the Application
-<video width="320" height="240" controls>
-  <source src="./screenshots/demo.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+### Download the Short Demo of the Application
+<a href="./screenshots/demo.mp4" download>Click here to download</a>
