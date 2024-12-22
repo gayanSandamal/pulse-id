@@ -131,3 +131,12 @@ export type CardProps = {
     children: ReactNode;
     className?: string; // Optional custom styles
 };
+
+export type SlideProps = {
+    index: number;
+    currentIndex: number;
+    img: SliderImage;
+    images: SliderImage[];
+    width: number;
+    setWidth: (width: number) => void;
+};

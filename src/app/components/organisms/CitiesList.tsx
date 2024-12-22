@@ -1,8 +1,10 @@
 import { cityImages } from "@/constants/cities"
 import CityCircle from "../molecules/CityCircle"
 import { SpacerSizeMap } from "@/types/components"
+import { useMemo } from "react"
 
 export const Cities = () => {
+    const cityList = useMemo(() => {
     return (
         <div className="flex flex-no-wrap overflow-x-auto">
             {cityImages.map((city) => (
@@ -18,4 +20,7 @@ export const Cities = () => {
             ))}
         </div>
     )
+    }, [cityImages])
+
+    return cityList
 }

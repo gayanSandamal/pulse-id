@@ -1,18 +1,9 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useMemo, useCallback } from 'react';
 import Image from 'next/image';
 import clsx from 'clsx';
-import { ImageSliderProps, RadiusMap, SliderImage, SpacerSizeMap, ThemeColors } from '@/types/components';
-
-type SlideProps = {
-    index: number;
-    currentIndex: number;
-    img: SliderImage;
-    images: SliderImage[];
-    width: number;
-    setWidth: (width: number) => void;
-};
+import { ImageSliderProps, RadiusMap, SlideProps, SpacerSizeMap, ThemeColors } from '@/types/components';
 
 const Slide = (props: SlideProps) => {
     const { img, images, index, currentIndex, width, setWidth } = props;
@@ -58,13 +49,43 @@ const ImageSlider = ({
     const touchStartX = useRef<number | null>(null);
     const touchEndX = useRef<number | null>(null);
 
-    if (images.length === 0) return null; // nothing to show
-
-    const goToSlide = (index: number) => {
+    const goToSlide = useCallback((index: number) => {
         if (index >= 0 && index < images.length) {
             setCurrentIndex(index);
         }
-    };
+    }, [images.length]);
+
+    const slides = useMemo(() => (
+        images.map((img, index) => (
+            <Slide
+                key={img.id}
+                index={index}
+                currentIndex={currentIndex}
+                img={img}
+                images={images}
+                width={sliderWidth}
+                setWidth={setSliderWidth}
+            />
+        ))
+    ), [images, currentIndex, sliderWidth]);
+
+    const bulletNavigations = useMemo(() => (
+        images.map((_, index) => (
+            <button
+                key={index}
+                onClick={() => goToSlide(index)}
+                className={clsx('rounded-full border border-white', 'transition-colors duration-300')}
+                style={{
+                    width: 8,
+                    height: 8,
+                    marginRight: SpacerSizeMap.S8,
+                    backgroundColor: currentIndex === index ? ThemeColors.Primary : ThemeColors.Inactive,
+                }}
+            />
+        ))
+    ), [images, currentIndex, goToSlide]);
+
+    if (images.length === 0) return null; // nothing to show
 
     const handleTouchStart = (e: React.TouchEvent) => {
         touchStartX.current = e.touches[0].clientX;
@@ -117,17 +138,7 @@ const ImageSlider = ({
                         borderRadius: RadiusMap.medium,
                     }}
                 >
-                    {images.map((img, index) => (
-                        <Slide
-                            key={img.id}
-                            index={index}
-                            currentIndex={currentIndex}
-                            img={img}
-                            images={images}
-                            width={sliderWidth}
-                            setWidth={setSliderWidth}
-                        />
-                    ))}
+                    {slides}
                 </div>
             </div>
 
@@ -136,19 +147,7 @@ const ImageSlider = ({
                 className="w-full flex justify-center"
                 style={{ marginTop: SpacerSizeMap.S12 }}
             >
-                {images.map((_, index) => (
-                    <button
-                        key={index}
-                        onClick={() => goToSlide(index)}
-                        className={clsx('rounded-full border border-white', 'transition-colors duration-300')}
-                        style={{
-                            width: 8,
-                            height: 8,
-                            marginRight: SpacerSizeMap.S8,
-                            backgroundColor: currentIndex === index ? ThemeColors.Primary : ThemeColors.Inactive,
-                        }}
-                    />
-                ))}
+                {bulletNavigations}
             </div>
         </div>
     );

@@ -24,6 +24,8 @@ const StyledSeeMore = styled.div`
     padding: ${SpacerSizeMap.S4};
 `;
 
+import { modalStyles } from '@/styles/popupModalStyles';
+
 export default function Popup({
     isOpen,
     onClose,
@@ -35,7 +37,6 @@ export default function Popup({
 }: ModalProps) {
     if (!isOpen) return null;
 
-
     const StyledPopup = styled.div`
         background-image: url(${imageSrc});
         padding: ${SpacerSizeMap.S16};
@@ -46,7 +47,7 @@ export default function Popup({
     `;
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50" style={{ paddingLeft: SpacerSizeMap.S36, paddingRight: SpacerSizeMap.S36 }}>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50" style={modalStyles.container}>
             <StyledPopup className="relative bg-white rounded-2xl overflow-hidden w-96 max-w-full shadow-lg">
                 <div className='absolute w-full h-full bg-black bg-opacity-50 top-0 left-0 z-0'></div>
                 <div className='relative flex flex-row items-center justify-between w-full z-10'>
@@ -61,7 +62,7 @@ export default function Popup({
                     <Button onClick={onClose} charm src='/images/close.svg' outline />
                 </div>
 
-                <div className="absolute z-10" style={{ width: `calc(100% - ${SpacerSizeMap.S32})`, bottom: SpacerSizeMap.S16 }}>
+                <div className="absolute z-10" style={modalStyles.content}>
                     <span
                         className="bg-orange-500 text-white text-sm font-medium px-3 py-1 rounded-full inline-flex items-center justify-center"
                         style={{
@@ -72,14 +73,14 @@ export default function Popup({
                         }}>
                         <Label type={LabelTypesMap.productCardTitle} color={ThemeColors.Primary}>{location}</Label>
                     </span>
-                    <div className="block" style={{ marginTop: SpacerSizeMap.S8, marginBottom: SpacerSizeMap.S8 }}>
+                    <div className="block" style={modalStyles.titleContainer}>
                         <Label type={LabelTypesMap.offerCardTitle} color={ThemeColors.Background}>{title}</Label>
                     </div>
 
                     {/* Rating and Reviews */}
-                    <div className='inline-flex items-center justify-between' style={{ marginBottom: SpacerSizeMap.S12 }}>
-                        <div className="inline-flex items-center space-x-2 text-sm text-gray-500" style={{ border: `1px solid ${ThemeColors.Background}`, borderRadius: SpacerSizeMap.S16, paddingTop: SpacerSizeMap.S4, paddingBottom: SpacerSizeMap.S4, paddingLeft: SpacerSizeMap.S8, paddingRight: SpacerSizeMap.S8 }}>
-                            <span className="relative flex items-center" style={{ width: 15, height: 15 }}>
+                    <div className='inline-flex items-center justify-between' style={modalStyles.ratingsContainer}>
+                        <div className="inline-flex items-center space-x-2 text-sm text-gray-500" style={modalStyles.ratingsInnerContainer}>
+                            <span className="relative flex items-center" style={modalStyles.startContainer}>
                                 <Image
                                     src="/images/star.svg"
                                     alt={'star'}
@@ -94,7 +95,7 @@ export default function Popup({
                     </div>
 
                     <StyledSeeMore className='flex items-center justify-between'>
-                        <div className="flex items-center justify-center" style={{ width: `calc(100% - ${SpacerSizeMap.S36})`, paddingLeft: SpacerSizeMap.S36 }}>
+                        <div className="flex items-center justify-center" style={modalStyles.seeMoreLabelContainer}>
                             <Label type={LabelTypesMap.popupAction} color={ThemeColors.Background}>See more</Label>
                         </div>
                         <Button onClick={() => { }} size='small' charm src='/images/chevron-right.svg' />
